@@ -1,5 +1,6 @@
 long duration,distance;
 void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
   pinMode(4, OUTPUT);
 pinMode(12, INPUT);
 Serial.begin(9600); 
@@ -7,13 +8,24 @@ Serial.begin(9600);
 }
 
 void loop() {
-  digitalWrite(4, LOW);
+digitalWrite(4, LOW); //Output to pin 4: 0
 delayMicroseconds(2);
-digitalWrite(4, HIGH);
+digitalWrite(4, HIGH); //Output to pin4 
 delayMicroseconds(10);
 digitalWrite(4, LOW);
 duration = pulseIn(12, HIGH);
 distance= duration*0.034/2;
-Serial.print("Distance: ");
+Serial.println("Distance: ");
 Serial.println(distance);
+
+if(distance<15)
+{
+  Serial.print("Condition Fulfilled");
+  digitalWrite(LED_BUILTIN, HIGH);
+  delayMicroseconds(2000);
+  digitalWrite(LED_BUILTIN, LOW);
+  
+  
+}
+delayMicroseconds(10);
 }
